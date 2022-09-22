@@ -1,0 +1,9 @@
+{
+  "name": "shopping-system",
+  "version": "1.0.0",
+  "description": "A shopping system",
+  "main": "index.js",
+  "repository": "https://github.com/eNkru/shopping-system.git",
+  "author": "Howard Ju",
+  "license": "MIT"
+}
