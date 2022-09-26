@@ -1,4 +1,7 @@
 # Shopping System
+[![Build Status](https://github.com/eNkru/shopping-system/actions/workflows/node.js.yml/badge.svg)](https://github.com/eNkru/shopping-system/actions/workflows/node.js.yml)
+![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)
+
 A shopping system
 
 ## Technical Stack
