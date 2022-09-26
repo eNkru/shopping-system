@@ -14,26 +14,29 @@ class FreeGiftStrategy implements IStrategy {
         this.giftProduct = {} as IProduct
     }
 
-    getStrategyName(): string {
-        return `Buy ${this.valueToTrigger} ${this.productSku} get a free ${this.giftProduct.sku}`
-    }
-
     apply(products: IProduct[]): void {
         const matchedProducts = ProductUtils.getProductsBySku(products, this.productSku)
-        const freeProducts = ProductUtils.getProductsBySku(products, this.giftProduct.sku)
-        const numberOfFreeProductToGive = Math.floor(matchedProducts.length / this.valueToTrigger)
-        if (freeProducts.length < numberOfFreeProductToGive) {
-            // simply add a log in console log.
-            // TODO: ideally should warn to user that the free product isn't added in the order (out of scope)
-            console.log("The order don't have enough free product to redeem.")
-        } else {
-            // add the credit for free products
+        if (matchedProducts.length) {
+            const freeProducts = ProductUtils.getProductsBySku(products, this.giftProduct.sku)
+            let numberOfFreeProductToGive = Math.floor(matchedProducts.length / this.valueToTrigger)
+            if (freeProducts.length < numberOfFreeProductToGive) {
+                // simply add a log in console log.
+                // TODO: ideally should warn to user that the free product isn't added in the order (out of scope)
+                console.log("The order don't have enough free gift to redeem. Please add the gift")
+                numberOfFreeProductToGive = freeProducts.length
+            }
+
+            // update the credit for free products
+            const creditProductName = `${this.giftProduct.name} CR`
             const giftProductCR = new ProductBuilder()
                 .sku(this.giftProduct.sku)
-                .name(`${this.giftProduct.name} CR`)
+                .name(creditProductName)
                 .price(- this.giftProduct.price * numberOfFreeProductToGive)
                 .build()
-            products.push(giftProductCR)
+            const newProducts = products.filter((product) => product.name !== creditProductName)
+            newProducts.push(giftProductCR)
+            products.length = 0
+            products.push(...newProducts)
         }
     }
 }
