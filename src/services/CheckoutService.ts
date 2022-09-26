@@ -9,6 +9,7 @@ import { StrategyService } from './StrategyService'
 
 class CheckoutService implements ICheckoutService{
     private static instance: CheckoutService
+    private products: IProduct[] = []
 
     /**
      * This StrategyService should be injected by using some framework
@@ -28,10 +29,15 @@ class CheckoutService implements ICheckoutService{
     }
 
     scan(product: IProduct): void {
-        console.log("scan item")
+        this.products.push(product)
+        this.strategyService.apply(this.products)
     }
 
     total(): number {
-        return 0
+        return this.products.reduce((total, current) => total + current.price, 0)
+    }
+    
+    clear(): void {
+        this.products = []
     }
 }
