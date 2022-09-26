@@ -25,8 +25,10 @@ yarn test
 * TDD
 
 ## Database Design
+![ERD](https://raw.githubusercontent.com/eNkru/shopping-system/main/assets/Database%20ER%20diagram.png)
 
 ## Class Design
+![Class Diagram](https://raw.githubusercontent.com/eNkru/shopping-system/main/assets/Class%20diagram.png)
 
 ## Improvement
 1. Only key logics are tested. Not write unit testing for models and helpers.
