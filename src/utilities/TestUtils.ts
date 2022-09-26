@@ -30,6 +30,13 @@ export const vga = new ProductBuilder()
 export const bulkDiscountStrategyTestCases = () => {
     return [
         [
+            `buy 1 ${mbp.name} with full price`,
+            [
+                ProductUtils.clone(mbp),
+            ],
+            mbp.price
+        ],
+        [
             `buy 3 ${mbp.name} with full price`,
             [
                 ProductUtils.clone(mbp),
@@ -59,13 +66,37 @@ export const bulkDiscountStrategyTestCases = () => {
             ],
             1099.99 * 5
         ],
+        [
+            `buy 10 ${mbp.name} still with price ${mbpBulkDiscountPrice}`,
+            [
+                ProductUtils.clone(mbp),
+                ProductUtils.clone(mbp),
+                ProductUtils.clone(mbp),
+                ProductUtils.clone(mbp),
+                ProductUtils.clone(mbp),
+                ProductUtils.clone(mbp),
+                ProductUtils.clone(mbp),
+                ProductUtils.clone(mbp),
+                ProductUtils.clone(mbp),
+                ProductUtils.clone(mbp),
+            ],
+            1099.99 * 10
+        ],
     ]
 }
 
 export const freeGiftStrategyTestCases = () => {
     return [
         [
-            `buy two ${ipd.name} get a free ${atv.name}`,
+            `buy 1 ${ipd.name} will not get a free ${atv.name}`,
+            [
+                ProductUtils.clone(ipd),
+                ProductUtils.clone(atv),
+            ],
+            ipd.price + atv.price
+        ],
+        [
+            `buy 2 ${ipd.name} get a free ${atv.name}`,
             [
                 ProductUtils.clone(ipd),
                 ProductUtils.clone(ipd),
@@ -73,18 +104,92 @@ export const freeGiftStrategyTestCases = () => {
             ],
             ipd.price * 2
         ],
+        [
+            `buy 3 ${ipd.name} will only get 1 free ${atv.name}`,
+            [
+                ProductUtils.clone(ipd),
+                ProductUtils.clone(ipd),
+                ProductUtils.clone(ipd),
+                ProductUtils.clone(atv),
+                ProductUtils.clone(atv),
+            ],
+            ipd.price * 3 + atv.price
+        ],
+        [
+            `buy 4 ${ipd.name} will get 2 free ${atv.name}`,
+            [
+                ProductUtils.clone(ipd),
+                ProductUtils.clone(ipd),
+                ProductUtils.clone(ipd),
+                ProductUtils.clone(ipd),
+                ProductUtils.clone(atv),
+                ProductUtils.clone(atv),
+            ],
+            ipd.price * 4
+        ],
+        [
+            `buy 5 ${ipd.name} will still get 2 free ${atv.name}`,
+            [
+                ProductUtils.clone(ipd),
+                ProductUtils.clone(ipd),
+                ProductUtils.clone(ipd),
+                ProductUtils.clone(ipd),
+                ProductUtils.clone(ipd),
+                ProductUtils.clone(atv),
+                ProductUtils.clone(atv),
+                ProductUtils.clone(atv),
+            ],
+            ipd.price * 5 + atv.price
+        ],
     ]
 }
 
 export const xForYStrategyTestCases = () => {
     return [
         [
-            `buy two ${vga.name} get one free`,
+            `buy 1 ${vga.name} for normal price`,
+            [
+                ProductUtils.clone(vga),
+            ],
+            vga.price
+        ],
+        [
+            `buy 2 ${vga.name} get 1 free`,
             [
                 ProductUtils.clone(vga),
                 ProductUtils.clone(vga),
             ],
             vga.price
+        ],
+        [
+            `buy 3 ${vga.name} still get 1 free`,
+            [
+                ProductUtils.clone(vga),
+                ProductUtils.clone(vga),
+                ProductUtils.clone(vga),
+            ],
+            vga.price * 2
+        ],
+        [
+            `buy 4 ${vga.name} will get 2 free`,
+            [
+                ProductUtils.clone(vga),
+                ProductUtils.clone(vga),
+                ProductUtils.clone(vga),
+                ProductUtils.clone(vga),
+            ],
+            vga.price * 2
+        ],
+        [
+            `buy 5 ${vga.name} will still get 2 free`,
+            [
+                ProductUtils.clone(vga),
+                ProductUtils.clone(vga),
+                ProductUtils.clone(vga),
+                ProductUtils.clone(vga),
+                ProductUtils.clone(vga),
+            ],
+            vga.price * 3
         ],
     ]
 }
