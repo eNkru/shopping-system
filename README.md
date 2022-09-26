@@ -13,7 +13,7 @@ A shopping system
 
 ## Environment
 The `CheckoutService` can be tested in Unit test.
-Run following command to preform the tests
+Run following command to perform the tests
 ```
 yarn
 yarn test
