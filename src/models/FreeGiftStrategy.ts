@@ -23,7 +23,9 @@ class FreeGiftStrategy implements IStrategy {
         const freeProducts = ProductUtils.getProductsBySku(products, this.giftProduct.sku)
         const numberOfFreeProductToGive = Math.floor(matchedProducts.length / this.valueToTrigger)
         if (freeProducts.length < numberOfFreeProductToGive) {
-            throw new Error("The order don't have enough free product to redeem.")
+            // simply add a log in console log.
+            // TODO: ideally should warn to user that the free product isn't added in the order (out of scope)
+            console.log("The order don't have enough free product to redeem.")
         } else {
             // add the credit for free products
             const giftProductCR = new ProductBuilder()

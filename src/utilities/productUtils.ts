@@ -14,4 +14,13 @@ export class ProductUtils {
     public static getProductsBySku(products: IProduct[], sku: string): IProduct[] {
         return products.filter((product) => product.sku === sku)
     }
+
+    /**
+     * Shallow clone a IProduct without the methods.
+     *
+     * @param product the give IProduct to clone
+     */
+    public static clone(product: IProduct): IProduct {
+        return Object.assign(product)
+    }
 }

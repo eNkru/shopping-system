@@ -7,7 +7,7 @@ import { IProduct } from '../models/IProduct'
 import { IStrategyService } from './IStrategyService'
 import { StrategyService } from './StrategyService'
 
-class CheckoutService implements ICheckoutService{
+export class CheckoutService implements ICheckoutService{
     private static instance: CheckoutService
     private products: IProduct[] = []
 
